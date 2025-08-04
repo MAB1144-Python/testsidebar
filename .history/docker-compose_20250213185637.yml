@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - main
+      - exp
+      
+  main:
+    build: ./backend
+    container_name: main
+    environment:
+      - FLASK_APP=main_server.py
+    volumes:
+      - ./backend:/app  # Asegura que los archivos sean accesibles
